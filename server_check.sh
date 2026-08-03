@@ -22,7 +22,7 @@ log() {
 check_disk() {
 	log "===== Disk Usage Check ====="
 
-	usage=$(df -h | grep "/dev/disk3s5" | awk '{print $5}' | tr -d '%')
+	usage=$(df -h / | tail -1 | awk '{print $5}' | tr -d '%')
 
 	if [ "$usage" -gt 80  ]; then
 		log "Warning: disk usage is at ${usage}"
