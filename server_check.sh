@@ -36,14 +36,29 @@ check_memory() {
 	free -h | tee -a "$LOG_FILE"
 }
 
+check_service() {
+	log "======= Service Check ========"
+
+	status=$(systemctl is-active nginx || true)
+
+	if [ "$status" = "active"  ]; then
+		log "OK: NGINX is running."
+	else
+		log "WARNING: NGINX is not running."
+	fi
+}
+
 summery() {
 	log "Health check completed at $(timestamp)"
 }
 
 main() {
+	log "========================================"
+   	log "Starting server health check"
 
 	check_disk
 	check_memory
+	check_service
 	summery
 }
 
