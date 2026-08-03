@@ -3,7 +3,7 @@
 set -euo pipefail
 
 #Configuration
-LOG_FILE="var/log/server_check.log"
+LOG_FILE="$HOME/server_check.log"
 
 # Fall back to home directory if /var/log is not writable
 if ! touch "$LOG_FILE" 2>/dev/null; then
